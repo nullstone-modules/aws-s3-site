@@ -6,10 +6,14 @@ output "bucket_name" {
   value = aws_s3_bucket.this.bucket
 }
 
-output "cdn_arn" {
-  value = aws_cloudfront_distribution.this.arn
+output "origin_domain_name" {
+  value = aws_s3_bucket.this.bucket_domain_name
 }
 
-output "cdn_domain" {
-  value = aws_cloudfront_distribution.this.domain_name
+output "origin_id" {
+  value = "S3-${aws_s3_bucket.this.id}"
+}
+
+output "origin_access_identity" {
+  value = aws_cloudfront_origin_access_identity.this.cloudfront_access_identity_path
 }

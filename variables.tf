@@ -15,26 +15,11 @@ variable "block_name" {
 }
 
 variable "parent_blocks" {
-  type = object({
-    subdomain : string
-  })
+  type = object({})
 }
 
 variable "backend_conn_str" {
   type = string
-}
-
-
-variable "enable_www" {
-  type        = bool
-  description = "Enable/Disable creating www.<subdomain> DNS record in addition to <subdomain> DNS record for hosted site"
-  default     = true
-}
-
-variable "enable_404page" {
-  type        = bool
-  description = "Enable/Disable custom 404 page within s3 bucket. If enabled, must provide 404.html"
-  default     = false
 }
 
 
