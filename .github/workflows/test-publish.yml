@@ -1,0 +1,49 @@
+name: 'Test and Publish'
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: 'Test'
+    runs-on: ubuntu-latest
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+      - name: Terraform Init
+        run: terraform init
+
+      # Checks that all Terraform configuration files adhere to a canonical format
+      - name: Terraform Format
+        run: terraform fmt -check
+  
+  publish:
+    name: 'Publish'
+    runs-on: ubuntu-latest
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Package files
+        run: tar --exclude='.github/' --exclude='.gitignore' cvzf block.tar.gz *
+
+      - name: Publish block version to nullstone registry
+        run: curl -XPOST -d @block.tar.gz https://registry.nullstone.io/nullstone/blocks/aws-s3-site/versions?version=$(cat VERSION)

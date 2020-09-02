@@ -1,14 +1,11 @@
-name: 'CI'
+name: 'Test'
 
 on:
-  push:
-    branches:
-    - master
   pull_request:
 
 jobs:
-  ci:
-    name: 'CI'
+  test:
+    name: 'Test'
     runs-on: ubuntu-latest
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
