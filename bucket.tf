@@ -1,5 +1,17 @@
+resource "random_string" "bucket_suffix" {
+  length  = 5
+  lower   = true
+  upper   = false
+  number  = false
+  special = false
+}
+
+locals {
+  bucket_name = "${local.full_name}-${random_string.bucket_suffix.result}"
+}
+
 resource "aws_s3_bucket" "this" {
-  bucket = local.full_name
+  bucket = local.bucket_name
   acl    = "private"
 
   policy = data.aws_iam_policy_document.s3_policy.json
@@ -24,7 +36,7 @@ resource "aws_s3_bucket_policy" "this" {
 data "aws_iam_policy_document" "s3_policy" {
   statement {
     actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::${local.full_name}/*"]
+    resources = ["arn:aws:s3:::${local.bucket_name}/*"]
 
     principals {
       type        = "AWS"
@@ -34,7 +46,7 @@ data "aws_iam_policy_document" "s3_policy" {
 
   statement {
     actions   = ["s3:ListBucket"]
-    resources = ["arn:aws:s3:::${local.full_name}"]
+    resources = ["arn:aws:s3:::${local.bucket_name}"]
 
     principals {
       type        = "AWS"
