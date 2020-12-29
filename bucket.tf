@@ -7,7 +7,7 @@ resource "random_string" "bucket_suffix" {
 }
 
 locals {
-  bucket_name = "${local.full_name}-${random_string.bucket_suffix.result}"
+  bucket_name = "${data.ns_workspace.this.hyphenated_name}-${random_string.bucket_suffix.result}"
 }
 
 resource "aws_s3_bucket" "this" {
@@ -21,11 +21,7 @@ resource "aws_s3_bucket" "this" {
     error_document = "404.html"
   }
 
-  tags = {
-    Stack = var.stack_name
-    Env   = var.env
-    Block = var.block_name
-  }
+  tags = data.ns_workspace.this.tags
 }
 
 resource "aws_s3_bucket_policy" "this" {
