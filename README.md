@@ -4,12 +4,10 @@ Nullstone Block standing up a static site on S3 in AWS.
 
 ## Inputs
 
-- `owner_id: string` - Stack Owner ID
-- `stack_name: string` - Stack Name
-- `block_name: string` - Block Name
-- `parent_blocks: {}` - Parent Blocks
-- `env: string` - Environment Name
-- `backend_conn_str: string` - Connection string for postgres backend
-
 ## Outputs
 
+- `bucket_arn` - The ARN of the created S3 bucket.
+- `bucket_name` - The name of the created S3 bucket.
+- `origin_domain_name` - The domain name for the created S3 bucket that can be used as an origin for CloudFront.
+- `origin_id` - The ID of the created S3 bucket used as an origin.
+- `origin_access_identity` - A prebuilt CloudFront origin access identity that is configured to work with the created S3 bucket.

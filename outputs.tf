@@ -15,7 +15,7 @@ output "origin_domain_name" {
 
 output "origin_id" {
   value       = "S3-${aws_s3_bucket.this.id}"
-  description = "string ||| The ID of the created S3 bucket."
+  description = "string ||| The ID of the created S3 bucket used as an origin."
 }
 
 output "origin_access_identity" {
