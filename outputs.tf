@@ -22,3 +22,15 @@ output "origin_access_identity" {
   value       = aws_cloudfront_origin_access_identity.this.cloudfront_access_identity_path
   description = "string ||| A prebuilt CloudFront origin access identity that is configured to work with the created S3 bucket."
 }
+
+output "deployer" {
+  value = {
+    name       = aws_iam_user.deployer.name
+    access_key = aws_iam_access_key.deployer.id
+    secret_key = aws_iam_access_key.deployer.secret
+  }
+
+  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to deploy to the S3 bucket."
+
+  sensitive = true
+}
