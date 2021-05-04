@@ -1,25 +1,12 @@
-resource "random_string" "bucket_suffix" {
-  length  = 5
-  lower   = true
-  upper   = false
-  number  = false
-  special = false
-}
-
-locals {
-  bucket_name = "${data.ns_workspace.this.hyphenated_name}-${random_string.bucket_suffix.result}"
-}
-
 resource "aws_s3_bucket" "this" {
-  bucket = local.bucket_name
+  bucket = local.resource_name
   acl    = "private"
+  tags   = data.ns_workspace.this.tags
 
   website {
     index_document = "index.html"
     error_document = "404.html"
   }
-
-  tags = data.ns_workspace.this.tags
 }
 
 resource "aws_s3_bucket_policy" "this" {
@@ -31,7 +18,7 @@ data "aws_iam_policy_document" "s3_policy" {
   statement {
     sid       = "AllowOriginReadObject"
     actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::${local.bucket_name}/*"]
+    resources = ["arn:aws:s3:::${local.resource_name}/*"]
 
     principals {
       type        = "AWS"
@@ -42,7 +29,7 @@ data "aws_iam_policy_document" "s3_policy" {
   statement {
     sid       = "AllowReadBucket"
     actions   = ["s3:ListBucket"]
-    resources = ["arn:aws:s3:::${local.bucket_name}"]
+    resources = ["arn:aws:s3:::${local.resource_name}"]
 
     principals {
       type = "AWS"
@@ -60,7 +47,7 @@ data "aws_iam_policy_document" "s3_policy" {
       "s3:GetObject",
       "s3:DeleteObject"
     ]
-    resources = ["arn:aws:s3:::${local.bucket_name}/*"]
+    resources = ["arn:aws:s3:::${local.resource_name}/*"]
 
     principals {
       type        = "AWS"

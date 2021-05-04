@@ -1,5 +1,5 @@
 resource "aws_iam_user" "deployer" {
-  name = "deployer-${random_string.bucket_suffix.result}"
+  name = "deployer-${local.resource_name}"
   tags = data.ns_workspace.this.tags
 }
 
@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "deployer" {
       "s3:ListBucket",
       "s3:GetBucketLocation"
     ]
-    resources = ["arn:aws:s3:::${local.bucket_name}"]
+    resources = ["arn:aws:s3:::${local.resource_name}"]
   }
 
   statement {
@@ -34,6 +34,6 @@ data "aws_iam_policy_document" "deployer" {
       "s3:DeleteObject"
     ]
 
-    resources = ["arn:aws:s3:::${local.bucket_name}/*"]
+    resources = ["arn:aws:s3:::${local.resource_name}/*"]
   }
 }
