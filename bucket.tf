@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "this" {
   bucket = local.resource_name
   acl    = "private"
-  tags   = data.ns_workspace.this.tags
+  tags   = local.tags
 
   website {
     index_document = "index.html"
@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "s3_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = [aws_cloudfront_origin_access_identity.this.iam_arn]
+      identifiers = local.oai_iam_arns
     }
   }
 
@@ -33,10 +33,7 @@ data "aws_iam_policy_document" "s3_policy" {
 
     principals {
       type = "AWS"
-      identifiers = [
-        aws_cloudfront_origin_access_identity.this.iam_arn,
-        aws_iam_user.deployer.arn
-      ]
+      identifiers = concat([aws_iam_user.deployer.arn], local.oai_iam_arns)
     }
   }
 

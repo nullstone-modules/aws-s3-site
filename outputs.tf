@@ -12,21 +12,6 @@ output "bucket_name" {
   description = "string ||| The name of the created S3 bucket."
 }
 
-output "origin_domain_name" {
-  value       = aws_s3_bucket.this.bucket_domain_name
-  description = "string ||| The domain name for the created S3 bucket that can be used as an origin for CloudFront."
-}
-
-output "origin_id" {
-  value       = "S3-${aws_s3_bucket.this.id}"
-  description = "string ||| The ID of the created S3 bucket used as an origin."
-}
-
-output "origin_access_identity" {
-  value       = aws_cloudfront_origin_access_identity.this.cloudfront_access_identity_path
-  description = "string ||| A prebuilt CloudFront origin access identity that is configured to work with the created S3 bucket."
-}
-
 output "deployer" {
   value = {
     name       = aws_iam_user.deployer.name
@@ -37,4 +22,17 @@ output "deployer" {
   description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to deploy to the S3 bucket."
 
   sensitive = true
+}
+
+locals {
+  additional_private_urls = []
+  additional_public_urls = []
+}
+
+output "private_urls" {
+  value = concat([for url in try(local.capabilities.private_urls, []) : url["url"]], local.additional_private_urls)
+}
+
+output "public_urls" {
+  value = concat([for url in try(local.capabilities.public_urls, []) : url["url"]], local.additional_public_urls)
 }
