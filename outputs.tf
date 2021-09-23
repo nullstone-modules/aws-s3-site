@@ -24,6 +24,10 @@ output "deployer" {
   sensitive = true
 }
 
+output "cdn_ids" {
+  value = [for cdn in try(local.capabilities.cdns, []) : cdn["id"]]
+}
+
 locals {
   additional_private_urls = []
   additional_public_urls  = []
