@@ -15,14 +15,20 @@ resource "aws_s3_bucket_policy" "this" {
 }
 
 data "aws_iam_policy_document" "s3_policy" {
-  statement {
-    sid       = "AllowOriginReadObject"
-    actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::${local.resource_name}/*"]
+  // Don't add the policy statement if we don't have any origin access identities
+  // The IAM policy would be invalid with no principal identifiers
+  dynamic "statement" {
+    for_each = len(local.oai_iam_arns) > 0 ? [local.oai_iam_arns] : []
 
-    principals {
-      type        = "AWS"
-      identifiers = local.oai_iam_arns
+    content {
+      sid       = "AllowOriginReadObject"
+      actions   = ["s3:GetObject"]
+      resources = ["arn:aws:s3:::${local.resource_name}/*"]
+
+      principals {
+        type        = "AWS"
+        identifiers = statement.value
+      }
     }
   }
 
@@ -32,7 +38,7 @@ data "aws_iam_policy_document" "s3_policy" {
     resources = ["arn:aws:s3:::${local.resource_name}"]
 
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = concat([aws_iam_user.deployer.arn], local.oai_iam_arns)
     }
   }

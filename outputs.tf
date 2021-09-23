@@ -26,7 +26,7 @@ output "deployer" {
 
 locals {
   additional_private_urls = []
-  additional_public_urls = []
+  additional_public_urls  = []
 }
 
 output "private_urls" {
