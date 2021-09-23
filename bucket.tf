@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "s3_policy" {
   // Don't add the policy statement if we don't have any origin access identities
   // The IAM policy would be invalid with no principal identifiers
   dynamic "statement" {
-    for_each = len(local.oai_iam_arns) > 0 ? [local.oai_iam_arns] : []
+    for_each = length(local.oai_iam_arns) > 0 ? [local.oai_iam_arns] : []
 
     content {
       sid       = "AllowOriginReadObject"
