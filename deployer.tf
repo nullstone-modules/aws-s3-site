@@ -36,4 +36,19 @@ data "aws_iam_policy_document" "deployer" {
 
     resources = ["arn:aws:s3:::${local.resource_name}/*"]
   }
+
+  dynamic "statement" {
+    for_each = length(local.cdn_arns) > 0 ? [local.cdn_arns] : []
+
+    content {
+      sid       = "AllowCdnUpdate"
+      effect    = "Allow"
+      resources = statement.value
+
+      actions = [
+        "cloudfront:GetDistribution",
+        "cloudfront:UpdateDistribution",
+      ]
+    }
+  }
 }
