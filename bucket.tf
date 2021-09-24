@@ -1,7 +1,8 @@
 resource "aws_s3_bucket" "this" {
-  bucket = local.resource_name
-  acl    = "private"
-  tags   = local.tags
+  bucket        = local.resource_name
+  acl           = "private"
+  tags          = local.tags
+  force_destroy = true
 
   website {
     index_document = "index.html"
