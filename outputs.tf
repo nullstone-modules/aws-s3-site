@@ -1,5 +1,6 @@
 output "region" {
-  value = data.aws_region.this.name
+  value       = data.aws_region.this.name
+  description = "string ||| The region where the S3 bucket resides."
 }
 
 output "bucket_arn" {
