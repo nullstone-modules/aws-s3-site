@@ -7,3 +7,11 @@ data "ns_app_env" "this" {
 locals {
   app_version = data.ns_app_env.this.version
 }
+
+locals {
+  app_metadata = tomap({
+    // Inject app metadata into capabilities here (e.g. security_group_name, role_name)
+    s3_domain_name = aws_s3_bucket.this.bucket_domain_name
+    s3_bucket_id   = aws_s3_bucket.this.id
+  })
+}

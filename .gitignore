@@ -9,3 +9,5 @@
 *.tfstate*
 *.tfvars
 envs/
+__backend__.tf
+.nullstone/active-workspace.yml

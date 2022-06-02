@@ -1,12 +1,17 @@
 // This file is replaced by code-generation using 'capabilities.tf.tmpl'
+// This file helps app module creators define a contract for what types of capability outputs are supported.
 locals {
   capabilities = {
+    // origin_access_identities refer to the origin identities that are attached to the cdns
+    // They are granted access to read contents from the S3 Bucket
     origin_access_identities = [
       {
         iam_arn = ""
       }
     ]
 
+    // cdns refer to attached Cloudfront Distribution Networks
+    // They are used to serve the static content inside the S3 Bucket
     cdns = [
       {
         id = ""
@@ -30,6 +35,5 @@ locals {
         url = ""
       }
     ]
-
   }
 }

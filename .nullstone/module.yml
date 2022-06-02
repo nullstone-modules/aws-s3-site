@@ -1,0 +1,11 @@
+org_name: nullstone
+name: aws-s3-site
+friendly_name: S3 Site
+description: Creates an S3 Bucket in AWS for the purposes of serving a static site
+category: app/static-site
+type: site/aws-s3
+appCategories: []
+layer: service
+is_public: true
+provider_types:
+    - aws
