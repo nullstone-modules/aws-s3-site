@@ -49,6 +49,7 @@ data "aws_iam_policy_document" "deployer" {
         "cloudfront:GetDistribution",
         "cloudfront:UpdateDistribution",
         "cloudfront:CreateInvalidation",
+        "cloudfront:GetInvalidation",
       ]
     }
   }
