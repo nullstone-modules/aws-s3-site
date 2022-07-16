@@ -35,6 +35,11 @@ output "deployer" {
   sensitive = true
 }
 
+output "env_vars_filename" {
+  value       = var.env_vars_filename
+  description = "string ||| The name of the S3 Object that contains a json-encoded configuration file with environment variables."
+}
+
 output "cdn_ids" {
   value = [for cdn in try(local.capabilities.cdns, []) : cdn["id"]]
 }
