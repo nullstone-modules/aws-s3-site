@@ -6,6 +6,6 @@ locals {
   additional_public_urls  = []
 
 
-  private_urls = concat([for url in try(local.capabilities.private_urls, []) : url["url"]], local.additional_private_urls)
-  public_urls  = concat([for url in try(local.capabilities.public_urls, []) : url["url"]], local.additional_public_urls)
+  private_urls = compact(concat([for url in try(local.capabilities.private_urls, []) : url["url"]], local.additional_private_urls))
+  public_urls  = compact(concat([for url in try(local.capabilities.public_urls, []) : url["url"]], local.additional_public_urls))
 }
