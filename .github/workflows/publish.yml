@@ -17,17 +17,17 @@ jobs:
         shell: bash
 
     steps:
-      # Checkout the repository to the GitHub Actions runner
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - name: Set up Nullstone
+        uses: nullstone-io/setup-nullstone-action@v0
 
       - name: Find version
         id: version
         run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/v}
 
-      - name: Set up Nullstone
-        uses: nullstone-io/setup-nullstone-action@v0
-
-      - name: Publish module
+      - id: publish
+        name: Publish
         run: |
           nullstone modules publish --version=${{ steps.version.outputs.tag }}
