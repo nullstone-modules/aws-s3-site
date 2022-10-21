@@ -1,7 +1,8 @@
 locals {
   standard_env_vars = tomap({
-    NULLSTONE_ENV     = local.env_name
-    NULLSTONE_VERSION = data.ns_app_env.this.version
+    NULLSTONE_ENV        = local.env_name
+    NULLSTONE_VERSION    = data.ns_app_env.this.version
+    NULLSTONE_COMMIT_SHA = data.ns_app_env.this.commit_sha
   })
   cap_env_vars = {for kv in try(local.capabilities.env, []) : kv.name => kv.value}
   env_vars     = merge(local.standard_env_vars, var.service_env_vars, local.cap_env_vars)
