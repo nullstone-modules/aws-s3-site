@@ -17,3 +17,9 @@ The name of the configuration file that will store environment variables.
 This should only be changed if the default 'env.json' collides with existing content.
 EOF
 }
+
+variable "enable_versioned_assets" {
+  type        = bool
+  description = "Enable/Disable serving assets from versioned S3 subdirectories"
+  default     = true
+}
