@@ -11,7 +11,8 @@ locals {
 locals {
   app_metadata = tomap({
     // Inject app metadata into capabilities here (e.g. security_group_name, role_name)
-    s3_domain_name = aws_s3_bucket.this.bucket_domain_name
-    s3_bucket_id   = aws_s3_bucket.this.id
+    s3_domain_name         = aws_s3_bucket.this.bucket_domain_name
+    s3_bucket_id           = aws_s3_bucket.this.id
+    artifacts_key_template = local.artifacts_key_template
   })
 }

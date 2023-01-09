@@ -23,3 +23,7 @@ variable "enable_versioned_assets" {
   description = "Enable/Disable serving assets from versioned S3 subdirectories"
   default     = true
 }
+
+locals {
+  artifacts_key_template = var.enable_versioned_assets ? "{{app-version}}/" : "/"
+}

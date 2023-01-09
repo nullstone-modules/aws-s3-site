@@ -19,7 +19,7 @@ output "artifacts_bucket_name" {
 }
 
 output "artifacts_key_template" {
-  value       = "{{app-version}}/"
+  value       = local.artifacts_key_template
   description = "string ||| Template for s3 directory where files are placed."
 }
 
