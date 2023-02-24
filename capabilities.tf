@@ -2,7 +2,6 @@
 // This file helps app module creators define a contract for what types of capability outputs are supported.
 locals {
   cap_env_vars = {}
-  cap_secrets  = {}
 
   capabilities = {
     // origin_access_identities refer to the origin identities that are attached to the cdns
