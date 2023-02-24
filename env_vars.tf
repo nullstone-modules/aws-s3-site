@@ -34,6 +34,6 @@ locals {
 resource "aws_s3_object" "env_file" {
   bucket       = aws_s3_bucket.this.bucket
   key          = var.env_vars_filename
-  content      = jsonencode(local.env_vars)
+  content      = jsonencode(local.all_env_vars)
   content_type = "application/json"
 }
