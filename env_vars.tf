@@ -1,4 +1,4 @@
-variable "service_env_vars" {
+variable "env_vars" {
   type        = map(string)
   default     = {}
   description = <<EOF
@@ -19,7 +19,7 @@ locals {
     NULLSTONE_PRIVATE_HOSTS = join(",", local.private_hosts)
   })
 
-  input_env_vars = merge(local.standard_env_vars, local.cap_env_vars, var.service_env_vars)
+  input_env_vars = merge(local.standard_env_vars, local.cap_env_vars, var.env_vars)
 }
 
 data "ns_env_variables" "this" {
