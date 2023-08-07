@@ -1,6 +1,22 @@
-# aws-s3-site
+# S3 Static Site
 
-Launch infrastructure for a static site hosted by AWS S3 Bucket.
+This app module is used to create a static site hosted by an S3 Bucket.
+
+Usually, an S3 Static Site has a Content Delivery Network (CDN) to serve content close to users.
+Add a "CDN for S3 Site" capability to serve content publicly from this application module.
+
+## Security & Compliance
+
+Security scanning is graciously provided by [Bridgecrew](https://bridgecrew.io/).
+Bridgecrew is the leading fully hosted, cloud-native solution providing continuous Terraform security and compliance.
+
+![Infrastructure Security](https://www.bridgecrew.cloud/badges/github/nullstone-modules/aws-s3-site/general)
+![CIS AWS V1.3](https://www.bridgecrew.cloud/badges/github/nullstone-modules/aws-s3-site/cis_aws_13)
+![PCI-DSS V3.2](https://www.bridgecrew.cloud/badges/github/nullstone-modules/aws-s3-site/pci)
+![NIST-800-53](https://www.bridgecrew.cloud/badges/github/nullstone-modules/aws-s3-site/nist)
+![ISO27001](https://www.bridgecrew.cloud/badges/github/nullstone-modules/aws-s3-site/iso)
+![SOC2](https://www.bridgecrew.cloud/badges/github/nullstone-modules/aws-s3-site/soc2)
+![HIPAA](https://www.bridgecrew.cloud/badges/github/nullstone-modules/aws-s3-site/hipaa)
 
 ## Deploys
 
