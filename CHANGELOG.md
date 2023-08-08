@@ -1,6 +1,7 @@
-# 0.9.1 (Aug 07, 2023)
+# 0.10.0 (Aug 08, 2023)
 * Added Bridgecrew scanning.
 * Updated `README.md`.
+* Fixed compliance issues.
 
 # 0.9.0 (Apr 25, 2023)
 * Drop `service_` prefix from variables.
