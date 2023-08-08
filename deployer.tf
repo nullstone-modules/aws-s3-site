@@ -1,4 +1,5 @@
 resource "aws_iam_user" "deployer" {
+  #bridgecrew:skip=CKV_AWS_273: Skipping "Ensure access is controlled through SSO and not AWS IAM defined users". SSO is unavailable to configure.
   name = "deployer-${local.resource_name}"
   tags = local.tags
 }
