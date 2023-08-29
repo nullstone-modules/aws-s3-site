@@ -15,6 +15,11 @@ resource "aws_iam_user_policy" "deployer" {
   policy = data.aws_iam_policy_document.deployer.json
 }
 
+resource "time_sleep" "wait_for_deployer_iam_propagation" {
+  depends_on      = [aws_iam_user_policy.deployer]
+  create_duration = "10s"
+}
+
 data "aws_iam_policy_document" "deployer" {
   statement {
     sid    = "AllowFindBucket"

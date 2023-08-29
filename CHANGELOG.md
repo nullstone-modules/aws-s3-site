@@ -1,3 +1,6 @@
+# 0.10.1 (Aug 29, 2023)
+* Added creation delay to ensure IAM propagates before deploying.
+
 # 0.10.0 (Aug 08, 2023)
 * Added Bridgecrew scanning.
 * Updated `README.md`.
