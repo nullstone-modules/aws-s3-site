@@ -1,3 +1,7 @@
+# 0.10.1 (Aug 29, 2023)
+* Added creation delay to ensure IAM propagates before deploying.
+* Fixed initial launch issue where an attached CDN redirects to the S3 bucket URL.
+
 # 0.10.0 (Aug 08, 2023)
 * Added Bridgecrew scanning.
 * Updated `README.md`.
