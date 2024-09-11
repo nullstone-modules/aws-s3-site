@@ -37,3 +37,14 @@ resource "aws_s3_object" "env_file" {
   content      = jsonencode(local.all_env_vars)
   content_type = "application/json"
 }
+
+resource "null_resource" "env_file_invalidation" {
+  for_each = local.cdn_ids
+
+  triggers = {
+    file_version = aws_s3_object.env_file.etag
+  }
+  provisioner "local-exec" {
+    command = "aws cloudfront create-invalidation --distribution-id '${each.value}' --paths '/${var.env_vars_filename}'"
+  }
+}
