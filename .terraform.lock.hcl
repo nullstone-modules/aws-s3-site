@@ -77,7 +77,11 @@ provider "registry.terraform.io/nullstone-io/awsex" {
   version     = "0.1.2"
   constraints = "~> 0.1.0"
   hashes = [
+    "h1:M7dNgsowpw7cLcagUTBpFNRQkSpeQyZ7ymPrli1dxDY=",
     "h1:VmksHCDCcJTxz8G5LJcoVTpALiVr744DjFZLi5bmZ+0=",
+    "h1:XF4b86gSmDvOePMdfNOINacgJN4Xcv64TvZtiVhdKX0=",
+    "h1:b2XPuXJ9J1pkebJH31pJVb+Ao3Mt3RJgxNoAwJ6pdWM=",
+    "h1:qIBuul7oMVezKkJiNwng89iTS+P8HG96iwmANgg9QjU=",
     "zh:15c53f88e4f5a1c63d25504fa904f1e6097363f61be884ad6452520bbfd39f9c",
     "zh:254a863665ca2ee2b62be869e1b4336c7fe42cab46e8686f5d4b308a222fa466",
     "zh:5e0332488d5ef95c1664b3264df2ea3aebe275db868e462a308ddc3adc86530c",
