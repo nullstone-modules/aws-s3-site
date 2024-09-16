@@ -37,3 +37,14 @@ resource "aws_s3_object" "env_file" {
   content      = jsonencode(local.all_env_vars)
   content_type = "application/json"
 }
+
+resource "awsex_cloudfront_distribution_invalidation" "env_file" {
+  for_each = toset(local.cdn_ids)
+
+  distribution_id = each.value
+  paths           = ["/${var.env_vars_filename}"]
+
+  triggers = {
+    file_sha = sha256(aws_s3_object.env_file.content)
+  }
+}

@@ -1,3 +1,6 @@
+# 0.10.2 (Sep 16, 2024)
+* Added CDN invalidation to the env file when env vars change.
+
 # 0.10.1 (Aug 29, 2023)
 * Added creation delay to ensure IAM propagates before deploying.
 * Fixed initial launch issue where an attached CDN redirects to the S3 bucket URL.
