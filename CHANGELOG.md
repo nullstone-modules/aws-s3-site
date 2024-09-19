@@ -1,3 +1,6 @@
+# 0.10.3 (Sep 19, 2024)
+* Disable cloudfront distribution invalidation since it's causing Terraform errors.
+
 # 0.10.2 (Sep 16, 2024)
 * Added CDN invalidation to the env file when env vars change.
 
