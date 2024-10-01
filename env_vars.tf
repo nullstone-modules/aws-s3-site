@@ -38,17 +38,11 @@ resource "aws_s3_object" "env_file" {
   content_type = "application/json"
 }
 
-/*
-TODO: for_each cannot rely on a computed value; local.cdn_ids is computed for some reason
-
-resource "awsex_cloudfront_distribution_invalidation" "env_file" {
-  for_each = toset(local.cdn_ids)
-
-  distribution_id = each.value
+resource "awsex_cloudfront_distribution_invalidations" "env_file" {
+  distribution_ids = local.cdn_ids
   paths           = ["/${var.env_vars_filename}"]
 
   triggers = {
     file_sha = sha256(aws_s3_object.env_file.content)
   }
 }
-*/
