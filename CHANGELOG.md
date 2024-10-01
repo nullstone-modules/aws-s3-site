@@ -1,3 +1,6 @@
+# 0.10.4 (Oct 01, 2024)
+* Fixed and restored cloudfront distribution invalidation.
+
 # 0.10.3 (Sep 19, 2024)
 * Disable cloudfront distribution invalidation since it's causing Terraform errors.
 
