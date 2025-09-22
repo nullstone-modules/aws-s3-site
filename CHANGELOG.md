@@ -1,3 +1,6 @@
+# 0.11.0 (Sep 22, 2025)
+* Upgrade terraform providers.
+
 # 0.10.4 (Oct 01, 2024)
 * Fixed and restored cloudfront distribution invalidation.
 
