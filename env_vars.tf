@@ -40,7 +40,7 @@ resource "aws_s3_object" "env_file" {
 
 resource "awsex_cloudfront_distribution_invalidations" "env_file" {
   distribution_ids = local.cdn_ids
-  paths           = ["/${var.env_vars_filename}"]
+  paths            = ["/${var.env_vars_filename}"]
 
   triggers = {
     file_sha = sha256(aws_s3_object.env_file.content)
