@@ -1,5 +1,5 @@
 output "region" {
-  value       = data.aws_region.this.region
+  value       = local.region
   description = "string ||| The region where the S3 bucket resides."
 }
 
@@ -41,7 +41,7 @@ output "env_vars_filename" {
 }
 
 output "cdn_ids" {
-  value = [for cdn in try(local.capabilities.cdns, []) : cdn["id"]]
+  value = local.cdn_ids
 }
 
 output "private_urls" {
@@ -52,4 +52,35 @@ output "private_urls" {
 output "public_urls" {
   value       = local.public_urls
   description = "list(string) ||| A list of URLs accessible to the public"
+}
+
+output "log_provider" {
+  value       = "cloudwatch"
+  description = "string ||| 'cloudwatch'"
+}
+
+output "log_group_name" {
+  value       = module.logs.name
+  description = "string ||| The name of the Cloudwatch Log Group where logs are stored."
+}
+
+output "log_reader" {
+  value       = module.logs.reader
+  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read logs from Cloudwatch."
+  sensitive   = true
+}
+
+output "metrics_provider" {
+  value       = "cloudwatch"
+  description = "string ||| 'cloudwatch'"
+}
+
+output "metrics_reader" {
+  value       = module.logs.reader
+  description = "object({ name: string, access_key: string, secret_key: string }) ||| An AWS User with explicit privilege to read metrics from Cloudwatch."
+  sensitive   = true
+}
+
+output "metrics_mappings" {
+  value = local.metrics_mappings
 }

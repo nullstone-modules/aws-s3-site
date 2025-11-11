@@ -1,27 +1,34 @@
 // This file is replaced by code-generation using 'capabilities.tf.tmpl'
 // This file helps app module creators define a contract for what types of capability outputs are supported.
 locals {
+  cap_modules = [
+    {
+      name       = ""
+      tfId       = ""
+      namespace  = ""
+      env_prefix = ""
+      outputs    = {}
+
+      meta = {
+        subcategory = ""
+        platform    = ""
+        subplatform = ""
+        outputNames = []
+      }
+    }
+  ]
+
+  // cap_env_prefixes is a map indexed by tfId which points to the env_prefix in local.cap_modules
+  cap_env_prefixes = tomap({
+    x = ""
+  })
+
   capabilities = {
-    // origin_access_identities refer to the origin identities that are attached to the cdns
-    // They are granted access to read contents from the S3 Bucket
-    origin_access_identities = [
-      {
-        iam_arn = ""
-      }
-    ]
-
-    // cdns refer to attached Cloudfront Distribution Networks
-    // They are used to serve the static content inside the S3 Bucket
-    cdns = [
-      {
-        id = ""
-      }
-    ]
-
     env = [
       {
-        name  = ""
-        value = ""
+        cap_tf_id = "x"
+        name      = ""
+        value     = ""
       }
     ]
 
@@ -30,7 +37,8 @@ locals {
     // They will be flattened into list(string) when we output from this module
     private_urls = [
       {
-        url = ""
+        cap_tf_id = "x"
+        url       = "http://example"
       }
     ]
 
@@ -39,10 +47,38 @@ locals {
     // They will be flattened into list(string) when we output from this module
     public_urls = [
       {
-        url = ""
+        cap_tf_id = "x"
+        url       = "https://example.com"
+      }
+    ]
+
+    // metrics allows capabilities to attach metrics to the application
+    // These metrics are displayed on the Application Monitoring page
+    // See https://docs.nullstone.io/extending/metrics/overview.html
+    metrics = [
+      {
+        cap_tf_id = "x"
+        name      = ""
+        type      = "usage|usage-percent|duration|generic"
+        unit      = ""
+
+        mappings = jsonencode({})
+      }
+    ]
+
+    cdns = [
+      {
+        cap_tf_id = "x"
+        id        = ""
+        arn       = ""
+      }
+    ]
+
+    origin_access_identities = [
+      {
+        cap_tf_id = "x"
+        iam_arn   = ""
       }
     ]
   }
-
-  cap_env_vars = {}
 }
