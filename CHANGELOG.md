@@ -1,6 +1,7 @@
 # 0.12.0 (Unreleased)
 * Added `var.enable_logging` to save access logs to Cloudwatch.
 * Added support for reading logs in Nullstone.
+* Optimized aggregation of capabilities.
 
 # 0.11.0 (Sep 22, 2025)
 * Upgrade terraform providers.

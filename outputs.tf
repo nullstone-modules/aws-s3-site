@@ -41,7 +41,7 @@ output "env_vars_filename" {
 }
 
 output "cdn_ids" {
-  value = [for cdn in try(local.capabilities.cdns, []) : cdn["id"]]
+  value = local.cdn_ids
 }
 
 output "private_urls" {
