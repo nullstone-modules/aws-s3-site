@@ -1,0 +1,3 @@
+locals {
+  metrics_mappings = []
+}

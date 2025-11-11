@@ -17,5 +17,7 @@ locals {
     // https://stackoverflow.com/questions/38735306/aws-cloudfront-redirecting-to-s3-bucket
     // This prevents issues where initial launch forces a redirect to the S3 bucket
     s3_domain_name = aws_s3_bucket.this.bucket_regional_domain_name
+    log_group_name = module.logs.name
+    log_group_arn  = module.logs.arn
   })
 }
