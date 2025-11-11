@@ -1,6 +1,6 @@
-# 0.12.0 (Unreleased)
-* Added `var.enable_logging` to save access logs to Cloudwatch.
+# 0.12.0 (Nov 11, 2025)
 * Added support for reading logs in Nullstone.
+* Added support for displaying metrics in Nullstone.
 * Optimized aggregation of capabilities.
 
 # 0.11.0 (Sep 22, 2025)
