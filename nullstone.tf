@@ -5,7 +5,8 @@ terraform {
       version = "~> 0.1.0"
     }
     ns = {
-      source = "nullstone-io/ns"
+      source  = "nullstone-io/ns"
+      version = "~> 0.8.2"
     }
   }
 }

@@ -1,3 +1,6 @@
+# 0.12.1 (Mar 05, 2026)
+* Upgrade to latest ns terraform provider to improve env var interpolation
+
 # 0.12.0 (Nov 11, 2025)
 * Added support for reading logs in Nullstone.
 * Added support for displaying metrics in Nullstone.
