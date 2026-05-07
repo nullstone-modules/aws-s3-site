@@ -101,7 +101,7 @@ data "aws_iam_policy_document" "s3_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = concat([aws_iam_user.deployer.arn], local.oai_iam_arns)
+      identifiers = concat([module.scaffold.deployer.role_arn], local.oai_iam_arns)
     }
   }
 
@@ -116,7 +116,7 @@ data "aws_iam_policy_document" "s3_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = [aws_iam_user.deployer.arn]
+      identifiers = [module.scaffold.deployer.role_arn]
     }
   }
 }

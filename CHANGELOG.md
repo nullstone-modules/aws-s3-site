@@ -1,3 +1,6 @@
+# 0.13.0 (May 07, 2026)
+* Migrated app scaffold to open-source module.
+
 # 0.12.1 (Mar 05, 2026)
 * Upgrade to latest ns terraform provider to improve env var interpolation
 
