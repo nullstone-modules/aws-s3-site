@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     awsex = {
-      source  = "nullstone-io/awsex"
+      source  = "registry.terraform.io/nullstone-io/awsex"
       version = "~> 0.1.0"
     }
     ns = {
