@@ -1,3 +1,7 @@
+# 0.13.1 (May 20, 2026)
+* Added `revalidate_html_pages` variable and `cache_control_rules` output. 
+   When enabled, the deployer serves HTML with `Cache-Control: no-cache` and hashed assets as long-cached/immutable, preventing stale-HTML / missing-chunk failures after deploy.
+
 # 0.13.0 (May 07, 2026)
 * Switched to OpenTofu.
 * Migrated app scaffold to open-source module.

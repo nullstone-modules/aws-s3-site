@@ -33,6 +33,15 @@ output "env_vars_filename" {
   description = "string ||| The name of the S3 Object that contains a json-encoded configuration file with environment variables."
 }
 
+output "cache_control_rules" {
+  description = "object ||| Cache-Control rules consumed by the Nullstone deployer when uploading site artifacts. Null when revalidation is disabled."
+  value = var.revalidate_html_pages ? {
+    revalidate_globs  = ["**/*.html"]
+    revalidate_header = "no-cache"
+    immutable_header  = "public, max-age=31536000, immutable"
+  } : null
+}
+
 output "cdn_ids" {
   value = local.cdn_ids
 }
