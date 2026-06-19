@@ -1,3 +1,7 @@
+# 0.14.0 (Jun 19, 2026)
+* Upgraded `nullstone-io/ns` provider to `~> 0.11.0`.
+* Used `aws_tags` from `data.ns_workspace` to tag all resources via provider `default_tags`.
+
 # 0.13.1 (May 20, 2026)
 * Added `revalidate_html_pages` variable and `cache_control_rules` output. 
    When enabled, the deployer serves HTML with `Cache-Control: no-cache` and hashed assets as long-cached/immutable, preventing stale-HTML / missing-chunk failures after deploy.
