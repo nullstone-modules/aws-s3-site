@@ -77,6 +77,27 @@ resource "aws_s3_bucket_policy" "this" {
 }
 
 data "aws_iam_policy_document" "s3_policy" {
+  statement {
+    sid     = "AllowSSLRequestsOnly"
+    effect  = "Deny"
+    actions = ["s3:*"]
+    resources = [
+      "arn:aws:s3:::${local.resource_name}",
+      "arn:aws:s3:::${local.resource_name}/*"
+    ]
+
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["false"]
+    }
+  }
+
   // Don't add the policy statement if we don't have any origin access identities
   // The IAM policy would be invalid with no principal identifiers
   dynamic "statement" {

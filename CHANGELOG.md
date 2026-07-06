@@ -1,3 +1,6 @@
+# 0.14.1 (Jul 06, 2026)
+* Added `AllowSSLRequestsOnly` statement to the bucket policy to deny non-HTTPS traffic.
+
 # 0.14.0 (Jun 19, 2026)
 * Upgraded `nullstone-io/ns` provider to `~> 0.11.0`.
 * Used `aws_tags` from `data.ns_workspace` to tag all resources via provider `default_tags`.
