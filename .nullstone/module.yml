@@ -4,6 +4,7 @@ friendly_name: S3 Site
 description: Creates an S3 Bucket in AWS for the purposes of serving a static site
 category: app
 subcategory: container
+app_type: generic
 provider_types:
     - aws
 platform: s3
