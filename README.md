@@ -54,16 +54,32 @@ behavior between HTML entry points and hashed assets:
 
 * **HTML files** are served with `Cache-Control: no-cache`, so browsers revalidate them on every
   load. New HTML is picked up immediately, enabling instant rollouts.
+* **Unhashed well-known files** (`*.xml`, `*.txt`, `*.json`, `*.webmanifest`, `favicon.*`) are also served
+  with `Cache-Control: no-cache`. Files like `sitemap.xml`, `robots.txt`, and `manifest.json` keep the
+  same name across deploys, so they must not be cached as immutable.
 * **Hashed assets** (JS, CSS, images, etc.) are served with
   `Cache-Control: public, max-age=31536000, immutable`, so they are cached long-term. The filename
   hash is the cache bust, so a new version produces new filenames rather than overwriting cached ones.
 
 Nullstone applies these headers while uploading objects during the "push" phase of deployment.
-HTML is matched by the `**/*.html` glob; everything else is treated as an immutable asset.
+Files matching a revalidate glob get `no-cache`; everything else is treated as an immutable asset.
 
-| Variable                | Type   | Default | Description                                                                        |
-|-------------------------|--------|---------|------------------------------------------------------------------------------------|
-| `revalidate_html_pages` | `bool` | `true`  | Serve HTML with `no-cache` and hashed assets as `immutable` to prevent stale HTML. |
+If the site publishes other files under stable names (e.g. `og-image.svg`, unhashed images), add them with `extra_revalidate_globs`.
+Globs use Go `path.Match` syntax against the path relative to the site root (`*` does not cross `/`);
+a leading `**/` matches the file name at any depth.
+
+```yaml
+vars:
+  extra_revalidate_globs:
+    - "og-image.svg" # a single file in the site root
+    - "images/*.jpg" # files directly inside images/
+    - "**/*.pdf"     # any depth
+```
+
+| Variable                 | Type           | Default | Description                                                                                          |
+|--------------------------|----------------|---------|------------------------------------------------------------------------------------------------------|
+| `revalidate_html_pages`  | `bool`         | `true`  | Serve HTML and unhashed well-known files with `no-cache` and hashed assets as `immutable`.           |
+| `extra_revalidate_globs` | `list(string)` | `[]`    | Additional globs served with `no-cache`. No effect unless `revalidate_html_pages` is true.           |
 
 Set `revalidate_html_pages = false` to disable this behavior and upload all objects without explicit `Cache-Control` headers.
 
