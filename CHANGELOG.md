@@ -1,4 +1,4 @@
-# 0.14.2 (Sep 29, 2026)
+# 0.15.0 (Sep 29, 2026)
 * Fixed unhashed well-known files being cached as `immutable` when `revalidate_html_pages` is enabled.
   `*.xml`, `*.txt`, `*.json`, `*.webmanifest`, and `favicon.*` are now served with `Cache-Control: no-cache` alongside `*.html`.
 * Added `extra_revalidate_globs` variable to revalidate additional unhashed files (e.g. `og-image.svg`).
