@@ -1,3 +1,8 @@
+# 0.14.2 (Sep 29, 2026)
+* Fixed unhashed well-known files being cached as `immutable` when `revalidate_html_pages` is enabled.
+  `*.xml`, `*.txt`, `*.json`, `*.webmanifest`, and `favicon.*` are now served with `Cache-Control: no-cache` alongside `*.html`.
+* Added `extra_revalidate_globs` variable to revalidate additional unhashed files (e.g. `og-image.svg`).
+
 # 0.14.1 (Jul 06, 2026)
 * Added `AllowSSLRequestsOnly` statement to the bucket policy to deny non-HTTPS traffic.
 

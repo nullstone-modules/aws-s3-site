@@ -36,7 +36,7 @@ output "env_vars_filename" {
 output "cache_control_rules" {
   description = "object ||| Cache-Control rules consumed by the Nullstone deployer when uploading site artifacts. Null when revalidation is disabled."
   value = var.revalidate_html_pages ? {
-    revalidate_globs  = ["**/*.html"]
+    revalidate_globs  = local.revalidate_globs
     revalidate_header = "no-cache"
     immutable_header  = "public, max-age=31536000, immutable"
   } : null
