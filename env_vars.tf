@@ -9,10 +9,6 @@ EOF
 }
 
 locals {
-  cap_env_vars = {
-    for item in local.capabilities.env : "${local.cap_env_prefixes[item.cap_tf_id]}${item.name}" => item.value
-  }
-
   standard_env_vars = tomap({
     NULLSTONE_STACK         = data.ns_workspace.this.stack_name
     NULLSTONE_APP           = data.ns_workspace.this.block_name
@@ -22,17 +18,23 @@ locals {
     NULLSTONE_PUBLIC_HOSTS  = join(",", local.public_hosts)
     NULLSTONE_PRIVATE_HOSTS = join(",", local.private_hosts)
   })
-
-  input_env_vars = merge(local.standard_env_vars, local.cap_env_vars, var.env_vars)
 }
 
-data "ns_env_variables" "this" {
-  input_env_variables = local.input_env_vars
-  input_secrets       = {}
+data "ns_env_values" "this" {
+  platform            = "aws_s3"
+  standard            = local.standard_env_vars
+  capability_env      = local.capabilities.env
+  capability_prefixes = local.cap_prefixes
+  user_env            = var.env_vars
+}
+
+// ns_env_platform_data records the environment so Nullstone can display it
+data "ns_env_platform_data" "this" {
+  values = data.ns_env_values.this.platform_data
 }
 
 locals {
-  all_env_vars = data.ns_env_variables.this.env_variables
+  all_env_vars = data.ns_env_values.this.env_variables
 }
 
 resource "aws_s3_object" "env_file" {
